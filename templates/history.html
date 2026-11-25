@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration History | TERRITY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --green: #173d32;
+    --deep: #102c25;
+    --gold: #b89455;
+    --cream: #f7f5ef;
+    --white: #fffefa;
+    --muted: #777d73;
+    --line: #e7e3d9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--cream);
+    color: #26352e;
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    background: var(--deep);
+    color: white;
+    padding: 19px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid rgba(184,148,85,.4);
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    letter-spacing: 2px;
+    color: #f5ead3;
+}
+
+.brand span {
+    color: var(--gold);
+}
+
+.tagline {
+    margin-top: 5px;
+    color: #c4c9bd;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #e6e7df;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: #d7b778;
+}
+
+.hero {
+    padding: 43px 7%;
+    background:
+        linear-gradient(90deg, rgba(12,37,30,.96), rgba(12,37,30,.76)),
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=85');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.eyebrow {
+    color: #d6b878;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 500;
+    margin: 12px 0;
+}
+
+.hero p {
+    color: #d4ddd5;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1350px;
+    margin: 38px auto 60px;
+    padding: 0 22px;
+}
+
+.notice {
+    background: #f8f2e6;
+    border: 1px solid #e9dcc2;
+    border-left: 4px solid var(--gold);
+    border-radius: 7px;
+    padding: 15px 18px;
+    margin-bottom: 23px;
+    color: #705d3c;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.notice strong {
+    color: #493b23;
+}
+
+.panel {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(31,48,37,.045);
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.section-label {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.panel h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: 27px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.panel-description {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 7px;
+    line-height: 1.6;
+}
+
+.record-label {
+    padding: 8px 13px;
+    border-radius: 30px;
+    background: #edf3e9;
+    color: #466b43;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.summary-card {
+    background: #f8f7f1;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.summary-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.summary-card strong {
+    color: var(--green);
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.filters input,
+.filters select {
+    height: 43px;
+    border: 1px solid #deded5;
+    border-radius: 6px;
+    padding: 0 13px;
+    background: #fffefa;
+    color: #34443b;
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+}
+
+.filters input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.filters select {
+    min-width: 200px;
+}
+
+.filters input:focus,
+.filters select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,148,85,.12);
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1050px;
+}
+
+thead {
+    background: #f1efe7;
+}
+
+th {
+    color: #59665a;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+th, td {
+    padding: 16px 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+
+td {
+    color: #465449;
+    font-size: 12px;
+}
+
+tbody tr {
+    transition: background .2s;
+}
+
+tbody tr:hover {
+    background: #faf9f4;
+}
+
+tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.reference {
+    color: #987641;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.service {
+    color: var(--green);
+    font-weight: 600;
+    min-width: 155px;
+}
+
+.status {
+    display: inline-block;
+    background: #edf3e9;
+    color: #466b43;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.empty {
+    text-align: center;
+    padding: 32px 15px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.empty-icon {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+#noResults {
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border: 1px solid var(--green);
+    border-radius: 5px;
+    background: var(--green);
+    color: white;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    background: #245b49;
+    border-color: #245b49;
+    transform: translateY(-1px);
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--green);
+    border-color: #c9c9bd;
+}
+
+.btn.secondary:hover {
+    background: #f1efe7;
+}
+
+footer {
+    background: var(--deep);
+    color: #bfc9bf;
+    text-align: center;
+    padding: 23px 15px;
+    font-size: 11px;
+    letter-spacing: .4px;
+}
+
+@media(max-width: 750px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    .panel {
+        padding: 20px 15px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters input,
+    .filters select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    header,
+    .hero,
+    .notice,
+    .filters,
+    .buttons,
+    footer,
+    .record-label {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .panel {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .table-wrap {
+        overflow: visible;
+        border: 0;
+    }
+
+    table {
+        min-width: 0;
+    }
+
+    th, td {
+        padding: 7px 5px;
+        font-size: 8px;
+    }
+
+    .panel h2 {
+        color: black;
+    }
+
+    .summary {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h2 class="brand">TERRI<span>TY</span></h2>
+        <p class="tagline">Truth rooted in land.</p>
+    </div>
+
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/instructions">Guide</a>
+        <a href="/search">Property Search</a>
+        <a href="/encumbrance">EC Request</a>
+        <a href="/verification">Verification</a>
+        <a href="/history" class="active">History</a>
+        <a href="/profile">Profile</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="eyebrow">Records / Activity overview</div>
+    <h1>Registration History</h1>
+    <p>View your property searches, EC requests and document verification submissions in one place.</p>
+</section>
+
+<main class="container">
+
+    <div class="notice">
+        <strong>Demonstration Notice:</strong>
+        These entries are locally stored demonstration submissions. They are not official government records, verified encumbrance certificates or proof of ownership.
+    </div>
+
+    <section class="panel">
+
+        <div class="panel-heading">
+            <div>
+                <div class="section-label">Your saved activity</div>
+                <h2>All Service Records</h2>
+                <p class="panel-description">
+                    A combined view of your activity across TERRITY services.
+                </p>
+            </div>
+
+            <div class="record-label">LOCAL DATABASE RECORDS</div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-card">
+                <span>Total Submissions</span>
+                <strong>{{ records|length }}</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Property Searches</span>
+                <strong>{{ records|selectattr('service', 'equalto', 'Property Search')|list|length }}</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>EC & Verification</span>
+                <strong>{{ records|rejectattr('service', 'equalto', 'Property Search')|list|length }}</strong>
+            </div>
+        </div>
+
+        <div class="filters">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search reference, document, district or village..."
+                oninput="filterHistory()"
+            >
+
+            <select id="serviceFilter" onchange="filterHistory()">
+                <option value="all">All Services</option>
+                <option value="Property Search">Property Search</option>
+                <option value="Encumbrance Certificate">EC Request</option>
+                <option value="Document Verification">Document Verification</option>
+            </select>
+        </div>
+
+        <div class="table-wrap">
+            <table id="historyTable">
+                <thead>
+                    <tr>
+                        <th>Reference Number</th>
+                        <th>Service</th>
+                        <th>Document Number</th>
+                        <th>District</th>
+                        <th>Village</th>
+                        <th>Survey Number</th>
+                        <th>Submission Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for record in records %}
+                    <tr data-service="{{ record.service }}">
+                        <td class="reference">{{ record.reference_number }}</td>
+                        <td class="service">{{ record.service }}</td>
+                        <td>{{ record.document_number or "—" }}</td>
+                        <td>{{ record.district or "—" }}</td>
+                        <td>{{ record.village or "—" }}</td>
+                        <td>{{ record.survey_number or "—" }}</td>
+                        <td>{{ record.record_date or "—" }}</td>
+                        <td><span class="status">{{ record.status }}</span></td>
+                    </tr>
+                    {% else %}
+                    <tr id="emptyRow">
+                        <td colspan="8" class="empty">
+                            <span class="empty-icon">⌕</span>
+                            No records saved yet.<br>
+                            Submit a property search, EC request or document verification to see your activity here.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p id="noResults" class="empty">
+            No matching records found. Try a different search or filter.
+        </p>
+
+        <div class="buttons">
+            <button class="btn" onclick="window.print()">
+                Print / Save History as PDF
+            </button>
+
+            <a href="/dashboard" class="btn secondary">
+                ← Back to Dashboard
+            </a>
+
+            <a href="/admin" class="btn secondary">
+                Admin Dashboard
+            </a>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    TERRITY &nbsp;·&nbsp; Truth rooted in land. &nbsp;·&nbsp; Independent Educational Project &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+function filterHistory() {
+    const search = document.getElementById("searchInput")
+        .value.toLowerCase().trim();
+
+    const service = document.getElementById("serviceFilter").value;
+
+    const rows = document.querySelectorAll(
+        "#historyTable tbody tr[data-service]"
+    );
+
+    let visible = 0;
+
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const rowService = row.dataset.service;
+
+        const matchesSearch = text.includes(search);
+        const matchesService =
+            service === "all" || rowService === service;
+
+        if (matchesSearch && matchesService) {
+            row.style.display = "";
+            visible++;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    const emptyRow = document.getElementById("emptyRow");
+
+    if (emptyRow) {
+        emptyRow.style.display = "none";
+    }
+
+    document.getElementById("noResults").style.display =
+        (rows.length > 0 && visible === 0) ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

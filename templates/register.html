@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | TERRITY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 18px;
+            background: #f3f0e8;
+            font-family: 'DM Sans', sans-serif;
+            color: #24372e;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            background: #fffdf8;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 22px 65px rgba(28, 47, 37, 0.13);
+        }
+
+        .visual {
+            position: relative;
+            min-height: 650px;
+            padding: 42px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #fffdf5;
+            background:
+                linear-gradient(180deg, rgba(13, 37, 29, 0.35), rgba(13, 37, 29, 0.88)),
+                url("https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=85") center/cover;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 31px;
+            letter-spacing: 2px;
+        }
+
+        .brand span {
+            color: #d5b56d;
+        }
+
+        .brand-tag {
+            margin-top: 7px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #e5d7b5;
+        }
+
+        .visual-bottom {
+            max-width: 390px;
+        }
+
+        .visual-line {
+            width: 48px;
+            height: 3px;
+            background: #d5b56d;
+            margin-bottom: 22px;
+        }
+
+        .visual h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 46px);
+            line-height: 1.18;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .visual p {
+            color: #e3e8df;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .visual-footer {
+            margin-top: 28px;
+            color: #d9cba9;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .form-side {
+            padding: 55px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            color: #a17c36;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #203b2e;
+            font-size: 35px;
+            font-weight: 600;
+            margin-bottom: 9px;
+        }
+
+        .subtitle {
+            color: #7c817a;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 27px;
+        }
+
+        .message {
+            padding: 11px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .error {
+            background: #fff0ed;
+            color: #b33b30;
+        }
+
+        .success {
+            background: #eaf5ed;
+            color: #267443;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            color: #394b40;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dedfd5;
+            border-radius: 8px;
+            background: #fffefa;
+            color: #24372e;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            transition: 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #a6aaa1;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #9c8650;
+            box-shadow: 0 0 0 3px rgba(156, 134, 80, 0.12);
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 7px;
+            background: #203b2e;
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .submit-btn:hover {
+            background: #315743;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 18px rgba(32, 59, 46, 0.17);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #777e76;
+            font-size: 13px;
+        }
+
+        a {
+            color: #9a7735;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .notice {
+            margin-top: 24px;
+            padding: 13px 15px;
+            border-left: 3px solid #c4a45d;
+            background: #f7f3e9;
+            color: #77705d;
+            font-size: 10px;
+            line-height: 1.8;
+        }
+
+        .footer {
+            margin-top: 22px;
+            text-align: center;
+            color: #a0a39a;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+            }
+
+            .visual {
+                min-height: 250px;
+                padding: 28px;
+            }
+
+            .visual h1 {
+                font-size: 30px;
+            }
+
+            .visual-bottom {
+                margin-top: 45px;
+            }
+
+            .visual-footer {
+                display: none;
+            }
+
+            .form-side {
+                padding: 35px 27px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <section class="visual">
+        <div>
+            <div class="brand">TERRI<span>TY</span></div>
+            <div class="brand-tag">Truth rooted in land.</div>
+        </div>
+
+        <div class="visual-bottom">
+            <div class="visual-line"></div>
+            <h1>Your property journey starts here.</h1>
+            <p>
+                Create your account to explore property information,
+                manage demo requests and keep your records organised
+                in one place.
+            </p>
+            <div class="visual-footer">Independent property records portal</div>
+        </div>
+    </section>
+
+    <section class="form-side">
+
+        <div class="eyebrow">Join TERRITY</div>
+        <h2>Create account</h2>
+        <p class="subtitle">
+            Set up your account with a few basic details.
+        </p>
+
+        {% if error %}
+            <div class="message error">{{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="message success">{{ success }}</div>
+        {% endif %}
+
+        <form method="POST" action="/register">
+
+            <div class="form-group">
+                <label for="full_name">FULL NAME</label>
+                <input
+                    type="text"
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">EMAIL ADDRESS</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">PASSWORD</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="district">DISTRICT</label>
+                <input
+                    type="text"
+                    id="district"
+                    name="district"
+                    placeholder="Enter your district"
+                    autocomplete="address-level2">
+            </div>
+
+            <button type="submit" class="submit-btn">
+                CREATE YOUR ACCOUNT
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/">Login here</a>
+        </div>
+
+        <div class="notice">
+            TERRITY is an independent educational demonstration.
+            It is not affiliated with or operated by any government
+            department. This account is not an official government account.
+        </div>
+
+        <div class="footer">
+            © 2026 TERRITY · TRUTH ROOTED IN LAND
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>

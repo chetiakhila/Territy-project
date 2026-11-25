@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Verification | TERRITY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --green: #173d32;
+    --deep: #102c25;
+    --gold: #b89455;
+    --cream: #f7f5ef;
+    --white: #fffefa;
+    --muted: #777d73;
+    --line: #e7e3d9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--cream);
+    color: #26352e;
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    background: var(--deep);
+    color: white;
+    padding: 19px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid rgba(184,148,85,.4);
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    letter-spacing: 2px;
+    color: #f5ead3;
+    margin: 0;
+}
+
+.brand span {
+    color: var(--gold);
+}
+
+.tagline {
+    margin: 5px 0 0;
+    color: #c4c9bd;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #e6e7df;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: #d7b778;
+}
+
+.hero {
+    min-height: 225px;
+    padding: 45px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background:
+        linear-gradient(90deg, rgba(12,37,30,.96), rgba(12,37,30,.77)),
+        url('https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=1600&q=85');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.eyebrow {
+    color: #d6b878;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 43px);
+    font-weight: 500;
+    margin: 12px 0;
+}
+
+.hero p {
+    color: #d4ddd5;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0;
+}
+
+.hero-mark {
+    width: 105px;
+    height: 105px;
+    border: 1px solid rgba(214,184,120,.65);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d6b878;
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    flex-shrink: 0;
+}
+
+.page {
+    max-width: 1050px;
+    margin: 38px auto 55px;
+    padding: 0 22px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    gap: 24px;
+    align-items: start;
+}
+
+.form-card,
+.side-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(31,48,37,.045);
+}
+
+.section-label {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.form-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: 27px;
+    font-weight: 600;
+    margin: 9px 0;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0 0 25px;
+}
+
+.notice {
+    background: #f8f2e6;
+    border: 1px solid #e9dcc2;
+    border-left: 4px solid var(--gold);
+    border-radius: 7px;
+    padding: 15px 17px;
+    margin-bottom: 24px;
+    color: #655638;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.notice strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #493b23;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 17px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: block;
+    color: #34443b;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    width: 100%;
+    height: 45px;
+    padding: 0 13px;
+    border: 1px solid #deded5;
+    border-radius: 6px;
+    background: #fffefa;
+    color: #26352e;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: .2s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,148,85,.12);
+}
+
+input::placeholder {
+    color: #a5a69e;
+}
+
+.submit-btn {
+    width: 100%;
+    height: 47px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--green);
+    color: white;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .25s;
+    margin-top: 5px;
+}
+
+.submit-btn:hover {
+    background: #245b49;
+    transform: translateY(-1px);
+}
+
+.side-card {
+    padding: 24px;
+}
+
+.side-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: 20px;
+    margin: 0 0 17px;
+}
+
+.step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 19px;
+}
+
+.step-number {
+    width: 29px;
+    height: 29px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #f1eadb;
+    color: #92713c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.step strong {
+    display: block;
+    color: #34443b;
+    font-size: 12px;
+    margin: 2px 0 4px;
+}
+
+.step p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.side-divider {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 21px 0;
+}
+
+.side-note {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.result {
+    margin-top: 25px;
+    background: #f1f6ef;
+    border: 1px solid #d7e4d2;
+    border-radius: 9px;
+    padding: 21px;
+}
+
+.result h3 {
+    color: #315b3b;
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    margin: 0 0 14px;
+}
+
+.result p {
+    font-size: 13px;
+    color: #536452;
+    line-height: 1.7;
+    margin: 7px 0;
+}
+
+.reference {
+    color: var(--green);
+    font-size: 16px;
+    letter-spacing: .5px;
+}
+
+.result-note {
+    border-top: 1px solid #d7e4d2;
+    margin-top: 14px !important;
+    padding-top: 12px;
+    font-size: 11px !important;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 11px 17px;
+    border-radius: 5px;
+    background: var(--green);
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.btn:hover {
+    background: #245b49;
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--green);
+    border: 1px solid #c9c9bd;
+}
+
+.btn.secondary:hover {
+    background: #f1efe7;
+}
+
+footer {
+    background: var(--deep);
+    color: #bfc9bf;
+    text-align: center;
+    padding: 23px 15px;
+    font-size: 11px;
+    letter-spacing: .4px;
+}
+
+@media(max-width: 760px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-mark {
+        display: none;
+    }
+}
+
+@media(max-width: 520px) {
+    .hero {
+        padding: 35px 6%;
+    }
+
+    .form-card {
+        padding: 22px 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h2 class="brand">TERRI<span>TY</span></h2>
+        <p class="tagline">Truth rooted in land.</p>
+    </div>
+
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/instructions">Guide</a>
+        <a href="/search">Property Search</a>
+        <a href="/encumbrance">EC Request</a>
+        <a href="/verification" class="active">Verification</a>
+        <a href="/history">History</a>
+        <a href="/profile">Profile</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">Document services / 03</div>
+        <h1>Document Verification</h1>
+        <p>Submit your registration details to create a verification request and keep a record of your submission.</p>
+    </div>
+    <div class="hero-mark">T</div>
+</section>
+
+<main class="page">
+
+    <div class="layout">
+
+        <section class="form-card">
+            <div class="section-label">Verification request</div>
+            <h2>Submit Document Details</h2>
+            <p class="description">
+                Enter the registration information below to generate a demonstration verification reference.
+            </p>
+
+            <div class="notice">
+                <strong>Important information</strong>
+                This is an independent educational demonstration. Submitted details are stored in the project's local database. They are not checked against government records and do not establish document authenticity or legal validity.
+            </div>
+
+            <form method="POST" action="/verification">
+
+                <div class="form-grid">
+
+                    <div class="field full">
+                        <label for="document_number">Document Number *</label>
+                        <input
+                            type="text"
+                            id="document_number"
+                            name="document_number"
+                            placeholder="Enter registered document number"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="registration_year">Registration Year *</label>
+                        <input
+                            type="number"
+                            id="registration_year"
+                            name="registration_year"
+                            min="1900"
+                            max="2100"
+                            placeholder="e.g. 2024"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="district">District *</label>
+                        <select name="district" id="district" required>
+                            <option value="">Select District</option>
+                            <option>Adilabad</option>
+                            <option>Bhadradri Kothagudem</option>
+                            <option>Hanumakonda</option>
+                            <option>Hyderabad</option>
+                            <option>Jagtial</option>
+                            <option>Jangaon</option>
+                            <option>Jayashankar Bhupalpally</option>
+                            <option>Jogulamba Gadwal</option>
+                            <option>Kamareddy</option>
+                            <option>Karimnagar</option>
+                            <option>Khammam</option>
+                            <option>Kumuram Bheem Asifabad</option>
+                            <option>Mahabubabad</option>
+                            <option>Mahabubnagar</option>
+                            <option>Mancherial</option>
+                            <option>Medak</option>
+                            <option>Medchal-Malkajgiri</option>
+                            <option>Mulugu</option>
+                            <option>Nagarkurnool</option>
+                            <option>Nalgonda</option>
+                            <option>Narayanpet</option>
+                            <option>Nirmal</option>
+                            <option>Nizamabad</option>
+                            <option>Peddapalli</option>
+                            <option>Rajanna Sircilla</option>
+                            <option>Rangareddy</option>
+                            <option>Sangareddy</option>
+                            <option>Siddipet</option>
+                            <option>Suryapet</option>
+                            <option>Vikarabad</option>
+                            <option>Wanaparthy</option>
+                            <option>Warangal</option>
+                            <option>Yadadri Bhuvanagiri</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Submit Verification Request →
+                </button>
+
+            </form>
+
+            {% if saved %}
+            <div class="result">
+                <h3>✓ Request Saved Successfully</h3>
+
+                <p>Reference Number:</p>
+                <p class="reference"><strong>{{ reference }}</strong></p>
+
+                <p><strong>Status:</strong> Demo Record Generated</p>
+                <p><strong>Database Status:</strong> Details Saved Locally</p>
+
+                <p class="result-note">
+                    This confirms that your request was saved in the project's local database. It does not confirm that the document is genuine or legally valid.
+                </p>
+            </div>
+            {% endif %}
+
+            <div class="buttons">
+                <a href="/dashboard" class="btn">← Back to Dashboard</a>
+                <a href="/admin" class="btn secondary">Admin Dashboard</a>
+            </div>
+        </section>
+
+        <aside class="side-card">
+            <div class="section-label">How it works</div>
+            <h3>Request Process</h3>
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <div>
+                    <strong>Enter Details</strong>
+                    <p>Provide your document number, registration year and district.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <div>
+                    <strong>Submit Request</strong>
+                    <p>Submit the form to save your details in the local database.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <div>
+                    <strong>Receive Reference</strong>
+                    <p>A demonstration reference number is generated for your request.</p>
+                </div>
+            </div>
+
+            <hr class="side-divider">
+
+            <div class="section-label">Project information</div>
+            <p class="side-note">
+                TERRITY is an independent educational project. It is not an official government portal and does not provide certified property or registration verification.
+            </p>
+        </aside>
+
+    </div>
+
+</main>
+
+<footer>
+    TERRITY &nbsp;·&nbsp; Truth rooted in land. &nbsp;·&nbsp; Independent Educational Project &nbsp;·&nbsp; 2026
+</footer>
+
+</body>
+</html>

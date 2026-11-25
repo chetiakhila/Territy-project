@@ -1,0 +1,887 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | TERRITY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f3f0e8;
+            color: #26382e;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        header {
+            background: #1d392c;
+            color: #fffdf5;
+            padding: 23px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 29px;
+            letter-spacing: 2px;
+        }
+
+        .brand span {
+            color: #d5b56d;
+        }
+
+        .brand-tag {
+            color: #d7d9ca;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .header-label {
+            border: 1px solid rgba(213,181,109,0.5);
+            color: #e5cf9c;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: #fffdf8;
+            padding: 16px 6%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 27px;
+            border-bottom: 1px solid #e8e5da;
+            box-shadow: 0 3px 15px rgba(34,48,37,0.04);
+        }
+
+        nav a {
+            color: #59665c;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #a17c36;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 36px auto;
+        }
+
+        .breadcrumb {
+            font-size: 11px;
+            color: #92978d;
+            margin-bottom: 22px;
+        }
+
+        .breadcrumb a {
+            color: #9a7735;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 235px;
+            padding: 38px 42px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            color: white;
+            background:
+                linear-gradient(90deg, rgba(20,48,35,0.96), rgba(20,48,35,0.70)),
+                url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1500&q=85")
+                center/cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            color: #d9bd79;
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 43px);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dce3d9;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #eaf2e9;
+            color: #47734e;
+            border: 1px solid #d8e7d7;
+            padding: 15px 18px;
+            border-radius: 9px;
+            margin-bottom: 28px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-icon {
+            width: 25px;
+            height: 25px;
+            background: #d5e8d3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-heading {
+            margin: 32px 0 18px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            color: #203b2e;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .section-heading p {
+            color: #858b80;
+            font-size: 12px;
+            margin-top: 7px;
+            line-height: 1.7;
+        }
+
+        .panel {
+            background: #fffdf8;
+            border: 1px solid #e9e5d9;
+            padding: 28px;
+            border-radius: 13px;
+            box-shadow: 0 7px 25px rgba(34,48,37,0.04);
+            margin-bottom: 23px;
+        }
+
+        .detail-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0 35px;
+        }
+
+        .detail {
+            padding: 17px 5px;
+            border-bottom: 1px solid #eeece4;
+            min-width: 0;
+        }
+
+        .detail strong {
+            display: block;
+            color: #92978d;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .detail span {
+            color: #35483b;
+            font-size: 14px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .ownership-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .info-card {
+            background: #f8f6ef;
+            border: 1px solid #eae6d9;
+            padding: 22px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: #d4c49e;
+            transform: translateY(-2px);
+        }
+
+        .info-icon {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ede8d9;
+            color: #9a7735;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .info-card p {
+            color: #858b80;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .info-card h3 {
+            color: #203b2e;
+            font-family: 'Playfair Display', serif;
+            font-size: 19px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .document-status {
+            display: inline-block;
+            background: #f2ead7;
+            color: #8b6b2d;
+            padding: 6px 11px;
+            border-radius: 30px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .notice {
+            background: #f7f3e9;
+            border-left: 3px solid #c4a45d;
+            padding: 16px 19px;
+            border-radius: 5px;
+            color: #77705d;
+            font-size: 11px;
+            line-height: 1.8;
+            margin: 24px 0;
+        }
+
+        .notice strong {
+            color: #80652f;
+        }
+
+        .map-panel {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .map-heading {
+            padding: 25px 28px 20px;
+        }
+
+        .map-heading h2 {
+            font-family: 'Playfair Display', serif;
+            color: #203b2e;
+            font-size: 24px;
+        }
+
+        .map-heading p {
+            color: #858b80;
+            font-size: 12px;
+            margin-top: 8px;
+            line-height: 1.7;
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding: 0 28px 18px;
+            color: #687568;
+            font-size: 11px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #286eae;
+        }
+
+        .legend-square {
+            width: 10px;
+            height: 10px;
+            background: #d5b56d;
+        }
+
+        #map {
+            width: 100%;
+            height: 440px;
+            background: #e9e9df;
+            border-top: 1px solid #e9e5d9;
+            border-bottom: 1px solid #e9e5d9;
+        }
+
+        .map-footer {
+            padding: 19px 28px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #faf8f1;
+        }
+
+        .map-stat strong {
+            display: block;
+            color: #203b2e;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .map-stat span {
+            color: #858b80;
+            font-size: 12px;
+        }
+
+        .map-note {
+            padding: 14px 18px;
+            background: #f7f3e9;
+            color: #77705d;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 20px;
+            background: #203b2e;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #315743;
+            transform: translateY(-1px);
+        }
+
+        .btn.gold {
+            background: #a17c36;
+        }
+
+        .btn.gold:hover {
+            background: #88672d;
+        }
+
+        .btn.secondary {
+            background: #f3f0e8;
+            color: #536255;
+            border: 1px solid #e4e0d4;
+        }
+
+        .btn.secondary:hover {
+            background: #eae5d8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #969a8e;
+            font-size: 10px;
+            letter-spacing: 1px;
+            background: #fffdf8;
+            border-top: 1px solid #e8e5da;
+            margin-top: 45px;
+        }
+
+        @media(max-width: 760px) {
+            header {
+                padding: 22px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                padding: 16px 22px;
+                gap: 17px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .hero {
+                padding: 30px 24px;
+                min-height: 210px;
+            }
+
+            .panel {
+                padding: 21px;
+            }
+
+            .ownership-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .detail-list {
+                gap: 0 15px;
+            }
+
+            #map {
+                height: 350px;
+            }
+        }
+
+        @media(max-width: 480px) {
+            .detail-list,
+            .ownership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2 {
+                font-size: 22px;
+            }
+
+            .map-heading {
+                padding: 22px 20px 17px;
+            }
+
+            .map-legend {
+                padding: 0 20px 17px;
+            }
+
+            .map-footer {
+                padding: 17px 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            #map {
+                height: 320px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            header, nav, .buttons, footer {
+                display: none !important;
+            }
+
+            .container {
+                width: 100%;
+                margin: 0;
+            }
+
+            .hero {
+                min-height: 150px;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .panel {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+
+            .info-card, .notice, .map-note, .status {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .map-panel {
+                break-inside: avoid;
+            }
+
+            #map {
+                height: 350px;
+            }
+
+            .leaflet-control {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <div class="brand">TERRI<span>TY</span></div>
+        <div class="brand-tag">Truth rooted in land.</div>
+    </div>
+
+    <div class="header-label">PROPERTY RECORDS</div>
+</header>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/instructions">Instructions</a>
+    <a href="/search">Property Search</a>
+    <a href="/encumbrance">EC Search</a>
+    <a href="/verification">Document Verification</a>
+    <a href="/history">History</a>
+    <a href="/profile">My Profile</a>
+</nav>
+
+<main class="container">
+
+    <div class="breadcrumb">
+        <a href="/dashboard">Dashboard</a>
+        &nbsp; / &nbsp;
+        <a href="/search">Property Search</a>
+        &nbsp; / &nbsp;
+        Property Details
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">TERRITY · PROPERTY INFORMATION</div>
+            <h1>Property Overview</h1>
+            <p>
+                Review the submitted property details, sample ownership
+                information and illustrative plot location.
+            </p>
+        </div>
+    </section>
+
+    <div class="status">
+        <div class="status-icon">✓</div>
+        Search completed — Demo information displayed
+    </div>
+
+    <div class="section-heading">
+        <h2>Search Information</h2>
+        <p>Details received from your property search request.</p>
+    </div>
+
+    <section class="panel">
+
+        <div class="detail-list">
+
+            <div class="detail">
+                <strong>Document Number</strong>
+                <span>{{ document_number or "Not provided" }}</span>
+            </div>
+
+            <div class="detail">
+                <strong>District</strong>
+                <span>{{ district or "Not provided" }}</span>
+            </div>
+
+            <div class="detail">
+                <strong>Village</strong>
+                <span>{{ village or "Not provided" }}</span>
+            </div>
+
+            <div class="detail">
+                <strong>Survey Number</strong>
+                <span>{{ survey_number or "Not provided" }}</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="section-heading">
+        <h2>Sample Ownership Information</h2>
+        <p>Illustrative property information for the project demonstration.</p>
+    </div>
+
+    <section class="ownership-grid">
+
+        <div class="info-card">
+            <div class="info-icon">♙</div>
+            <p>Owner Name</p>
+            <h3>Ramesh Kumar</h3>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">⌂</div>
+            <p>Property Type</p>
+            <h3>Agricultural Land</h3>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">▧</div>
+            <p>Land Area</p>
+            <h3>4,200 Sq. Yards</h3>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">◷</div>
+            <p>Registration Date</p>
+            <h3>15 June 2024</h3>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">✓</div>
+            <p>Document Status</p>
+            <h3>
+                <span class="document-status">Demo Record</span>
+            </h3>
+        </div>
+
+        <div class="info-card">
+            <div class="info-icon">⌖</div>
+            <p>Registration Office</p>
+            <h3>Warangal (Sample)</h3>
+        </div>
+
+    </section>
+
+    <div class="notice">
+        <strong>Important Notice:</strong>
+        All ownership information displayed here is fictional sample data.
+        It is not retrieved from or verified by any government department.
+        This page does not establish legal ownership or confirm property title.
+    </div>
+
+    <div class="section-heading">
+        <h2>Property Location & Plot Boundary</h2>
+        <p>
+            Explore the illustrative property location, highlighted plot
+            and four sample boundary corners using the interactive map.
+        </p>
+    </div>
+
+    <section class="panel map-panel">
+
+        <div class="map-heading">
+            <h2>Interactive Property Map</h2>
+            <p>
+                Switch between map and satellite views to explore
+                the sample plot location.
+            </p>
+        </div>
+
+        <div class="map-legend">
+            <div class="legend-item">
+                <span class="legend-dot"></span>
+                Property location
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-square"></span>
+                Sample plot boundary
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <div class="map-footer">
+
+            <div class="map-stat">
+                <strong>ILLUSTRATIVE PLOT AREA</strong>
+                <span>Approx. 4,200 sq. yards</span>
+            </div>
+
+            <div class="map-stat">
+                <strong>BOUNDARY POINTS</strong>
+                <span>4 sample corners</span>
+            </div>
+
+            <div class="map-stat">
+                <strong>MAP LOCATION</strong>
+                <span>Warangal, Telangana</span>
+            </div>
+
+        </div>
+
+        <div class="map-note">
+            <strong>Map Disclaimer:</strong>
+            The displayed location, boundary coordinates and area are
+            illustrative sample data. They are not official survey
+            measurements, cadastral maps or verified property boundaries.
+        </div>
+
+    </section>
+
+    <div class="buttons">
+
+        <button class="btn gold" onclick="downloadPDF()">
+            PRINT / SAVE PROPERTY REPORT
+        </button>
+
+        <a href="/search" class="btn">
+            SEARCH AGAIN
+        </a>
+
+        <a href="/dashboard" class="btn secondary">
+            BACK TO DASHBOARD
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+    © 2026 TERRITY · TRUTH ROOTED IN LAND
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const mapElement = document.getElementById("map");
+
+        if (!mapElement || typeof L === "undefined") {
+            mapElement.innerHTML =
+                "Map could not be loaded. Please check your internet connection.";
+            return;
+        }
+
+        // Illustrative coordinates for the project demonstration
+        const plotBoundary = [
+            [17.9692, 79.5938],
+            [17.9692, 79.5944],
+            [17.9687, 79.5944],
+            [17.9687, 79.5938]
+        ];
+
+        const map = L.map("map", {
+            zoomControl: true
+        });
+
+        const normalMap = L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors",
+                maxZoom: 19
+            }
+        );
+
+        const satelliteMap = L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+            {
+                attribution: "Tiles &copy; Esri",
+                maxZoom: 19
+            }
+        );
+
+        normalMap.addTo(map);
+
+        const baseMaps = {
+            "Normal Map": normalMap,
+            "Satellite View": satelliteMap
+        };
+
+        L.control.layers(baseMaps, null, {
+            position: "topright"
+        }).addTo(map);
+
+        const plot = L.polygon(plotBoundary, {
+            color: "#a17c36",
+            fillColor: "#d5b56d",
+            fillOpacity: 0.32,
+            weight: 3
+        }).addTo(map);
+
+        plot.bindPopup(
+            "<strong>Sample Property Plot</strong><br>Illustrative plot boundary"
+        );
+
+        plotBoundary.forEach(function (point, index) {
+
+            L.circleMarker(point, {
+                radius: 7,
+                color: "#ffffff",
+                weight: 2,
+                fillColor: "#286eae",
+                fillOpacity: 1
+            })
+            .addTo(map)
+            .bindPopup("Sample Boundary Corner " + (index + 1));
+
+        });
+
+        const propertyMarker = L.marker([17.96895, 79.5941])
+            .addTo(map);
+
+        propertyMarker.bindPopup(
+            "<strong>Property Location</strong><br>Illustrative sample location"
+        );
+
+        map.fitBounds(plot.getBounds(), {
+            padding: [45, 45]
+        });
+
+        // Ensure the map renders correctly after the page layout settles
+        setTimeout(function () {
+            map.invalidateSize();
+        }, 250);
+
+        window.addEventListener("beforeprint", function () {
+            map.invalidateSize();
+        });
+
+    });
+
+    function downloadPDF() {
+        window.print();
+    }
+</script>
+
+</body>
+</html>

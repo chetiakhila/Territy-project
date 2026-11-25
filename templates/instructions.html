@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Guide | TERRITY</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --green: #173d32;
+    --deep: #102c25;
+    --gold: #b89455;
+    --cream: #f7f5ef;
+    --white: #fffefa;
+    --muted: #777d73;
+    --line: #e7e3d9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--cream);
+    color: #26352e;
+    font-family: 'DM Sans', sans-serif;
+}
+
+header {
+    background: var(--deep);
+    color: white;
+    padding: 19px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid rgba(184,148,85,.4);
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    letter-spacing: 2px;
+    color: #f5ead3;
+}
+
+.brand span {
+    color: var(--gold);
+}
+
+.tagline {
+    margin-top: 5px;
+    color: #c4c9bd;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #e6e7df;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: #d7b778;
+}
+
+.hero {
+    min-height: 245px;
+    padding: 48px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background:
+        linear-gradient(90deg, rgba(12,37,30,.96), rgba(12,37,30,.75)),
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=85');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.eyebrow {
+    color: #d6b878;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 45px);
+    font-weight: 500;
+    margin: 12px 0;
+}
+
+.hero p {
+    color: #d4ddd5;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.hero-mark {
+    width: 105px;
+    height: 105px;
+    border: 1px solid rgba(214,184,120,.65);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d6b878;
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    flex-shrink: 0;
+}
+
+.container {
+    max-width: 1050px;
+    margin: 42px auto 60px;
+    padding: 0 22px;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.section-label {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.intro h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: 29px;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.intro p {
+    max-width: 600px;
+    margin: auto;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.guide-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 23px;
+    align-items: start;
+}
+
+.steps-card,
+.side-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(31,48,37,.045);
+}
+
+.step {
+    display: flex;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.step:first-child {
+    padding-top: 5px;
+}
+
+.step:last-child {
+    border-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f1eadb;
+    color: #987641;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    border: 1px solid #e8dcc4;
+}
+
+.step-content {
+    padding-top: 3px;
+}
+
+.step-content h3 {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.step-content p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.side-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: 21px;
+    margin: 10px 0 17px;
+}
+
+.feature {
+    display: flex;
+    gap: 11px;
+    margin-bottom: 17px;
+    align-items: flex-start;
+}
+
+.feature-icon {
+    width: 31px;
+    height: 31px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #f1eadb;
+    color: #987641;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.feature strong {
+    display: block;
+    font-size: 12px;
+    color: #34443b;
+    margin: 2px 0 4px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.side-divider {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 20px 0;
+}
+
+.warning {
+    background: #f8f2e6;
+    border: 1px solid #e9dcc2;
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-top: 24px;
+    color: #705d3c;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.warning strong {
+    display: block;
+    color: #493b23;
+    margin-bottom: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 21px;
+    border-radius: 5px;
+    background: var(--green);
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.btn:hover {
+    background: #245b49;
+    transform: translateY(-1px);
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--green);
+    border: 1px solid #c9c9bd;
+}
+
+.btn.secondary:hover {
+    background: #f1efe7;
+}
+
+footer {
+    background: var(--deep);
+    color: #bfc9bf;
+    text-align: center;
+    padding: 23px 15px;
+    font-size: 11px;
+    letter-spacing: .4px;
+}
+
+@media(max-width: 760px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    .guide-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-mark {
+        display: none;
+    }
+}
+
+@media(max-width: 480px) {
+    .steps-card,
+    .side-card {
+        padding: 21px 17px;
+    }
+
+    .step {
+        gap: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h2 class="brand">TERRI<span>TY</span></h2>
+        <p class="tagline">Truth rooted in land.</p>
+    </div>
+
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/instructions" class="active">Guide</a>
+        <a href="/search">Property Search</a>
+        <a href="/encumbrance">EC Request</a>
+        <a href="/verification">Verification</a>
+        <a href="/history">History</a>
+        <a href="/profile">Profile</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">Getting started / User guide</div>
+        <h1>Explore TERRITY</h1>
+        <p>A simple guide to navigating property search, document requests and illustrative property mapping features.</p>
+    </div>
+
+    <div class="hero-mark">T</div>
+</section>
+
+<main class="container">
+
+    <div class="intro">
+        <div class="section-label">A step-by-step guide</div>
+        <h2>How to Use the Portal</h2>
+        <p>Follow these steps to explore the available services and understand how the demonstration portal works.</p>
+    </div>
+
+    <div class="guide-layout">
+
+        <section class="steps-card">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Prepare Your Property Details</h3>
+                    <p>Keep your sample document number, registration year, district, mandal, village and survey number ready before starting a search.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Search Property Information</h3>
+                    <p>Open Property Search and enter the requested property details. Select the relevant location and submit the form to view the demonstration result.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Explore the Property Map</h3>
+                    <p>Use the illustrative map interface to explore the displayed location and map layers. Any shown boundaries are sample visualisations, not surveyed property boundaries.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>Submit an EC Request</h3>
+                    <p>Visit the EC Request section and enter either document-based or property-based sample information to generate a demonstration request reference.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">05</div>
+                <div class="step-content">
+                    <h3>Request Document Verification</h3>
+                    <p>Enter the document number, registration year and district to save a verification request in the project's local database.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">06</div>
+                <div class="step-content">
+                    <h3>Review Your Activity</h3>
+                    <p>Open History to review saved property searches. Your Profile section displays the account details provided during registration.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <aside class="side-card">
+
+            <div class="section-label">Portal features</div>
+            <h3>What You Can Explore</h3>
+
+            <div class="feature">
+                <div class="feature-icon">⌕</div>
+                <div>
+                    <strong>Property Search</strong>
+                    <p>Explore sample property search forms and results.</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⌖</div>
+                <div>
+                    <strong>Interactive Mapping</strong>
+                    <p>View illustrative map layers and location information.</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">▤</div>
+                <div>
+                    <strong>EC Request</strong>
+                    <p>Create a locally stored demonstration request.</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <div>
+                    <strong>Document Verification</strong>
+                    <p>Generate a local demonstration reference number.</p>
+                </div>
+            </div>
+
+            <hr class="side-divider">
+
+            <div class="section-label">Before you begin</div>
+            <p style="color:var(--muted);font-size:11px;line-height:1.8;">
+                Use sample information while exploring the academic demonstration. Do not treat generated results as certified property records.
+            </p>
+
+        </aside>
+
+    </div>
+
+    <div class="warning">
+        <strong>Important Project Disclaimer</strong>
+        TERRITY is an independent academic demonstration and is not affiliated with or operated by any government department. It does not connect to official land-registration databases or independently verify ownership, document authenticity, legal validity or surveyed property boundaries. All generated records and map illustrations are for demonstration purposes only.
+    </div>
+
+    <div class="buttons">
+        <a href="/search" class="btn">Proceed to Property Search →</a>
+        <a href="/dashboard" class="btn secondary">← Back to Dashboard</a>
+    </div>
+
+</main>
+
+<footer>
+    TERRITY &nbsp;·&nbsp; Truth rooted in land. &nbsp;·&nbsp; Independent Educational Project &nbsp;·&nbsp; 2026
+</footer>
+
+</body>
+</html>

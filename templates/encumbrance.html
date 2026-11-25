@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERRITY | Encumbrance Certificate</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --green:#173c32;
+    --deep:#102c25;
+    --gold:#b99557;
+    --cream:#f7f5ef;
+    --white:#fff;
+    --text:#263b34;
+    --muted:#78847e;
+    --border:#e5e7df;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family:'DM Sans',sans-serif;
+    background:var(--cream);
+    color:var(--text);
+}
+
+header {
+    background:var(--deep);
+    color:white;
+    padding:17px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.brand {
+    font-family:'Playfair Display',serif;
+    font-size:27px;
+    letter-spacing:2px;
+    color:#f4e9d2;
+}
+
+.brand small {
+    display:block;
+    font-family:'DM Sans',sans-serif;
+    font-size:9px;
+    letter-spacing:3px;
+    color:#c8b58e;
+    margin-top:2px;
+}
+
+nav { display:flex; gap:24px; flex-wrap:wrap; }
+
+nav a {
+    color:#e5e9e4;
+    text-decoration:none;
+    font-size:13px;
+}
+
+nav a:hover { color:#d9b979; }
+
+.hero {
+    min-height:245px;
+    padding:48px 8%;
+    background:
+        linear-gradient(90deg,rgba(12,37,30,.94),rgba(12,37,30,.65)),
+        url("https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=85") center/cover;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.eyebrow {
+    color:#d5b77d;
+    font-size:11px;
+    letter-spacing:3px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(32px,5vw,45px);
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.hero p {
+    color:#d9e0d9;
+    font-size:14px;
+    max-width:560px;
+    line-height:1.7;
+}
+
+.container {
+    width:min(900px,90%);
+    margin:38px auto 65px;
+}
+
+.topline {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.topline h2 {
+    font-family:'Playfair Display',serif;
+    font-size:26px;
+    font-weight:600;
+}
+
+.tag {
+    background:#e8eee6;
+    color:var(--green);
+    padding:7px 12px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.panel {
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 12px 35px rgba(20,45,35,.055);
+}
+
+.section-title {
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    color:var(--green);
+    margin:5px 0 17px;
+    text-transform:uppercase;
+}
+
+.section-title span { color:var(--gold); margin-right:8px; }
+
+.method-grid {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-bottom:30px;
+}
+
+.method-option {
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:17px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.method-option:has(input:checked) {
+    border-color:var(--green);
+    background:#f3f7f2;
+}
+
+.method-option input[type="radio"] {
+    width:17px!important;
+    height:17px!important;
+    min-width:17px;
+    margin:3px 0 0;
+    padding:0!important;
+    accent-color:var(--green);
+    cursor:pointer;
+    box-shadow:none!important;
+}
+
+.method-option strong {
+    display:block;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.method-option small {
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.5;
+    display:block;
+}
+
+.form-grid {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-bottom:22px;
+}
+
+.field { display:flex; flex-direction:column; gap:8px; }
+.field.full { grid-column:1/-1; }
+
+label {
+    font-size:12px;
+    font-weight:700;
+    color:#344c42;
+}
+
+input:not([type="radio"]), select {
+    width:100%;
+    height:47px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:0 13px;
+    font-family:inherit;
+    font-size:13px;
+    color:var(--text);
+    background:white;
+    outline:none;
+}
+
+input:focus, select:focus {
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(185,149,87,.10);
+}
+
+input:disabled, select:disabled {
+    background:#f2f3ef;
+    cursor:not-allowed;
+}
+
+.hidden { display:none!important; }
+
+.divider {
+    border:none;
+    border-top:1px solid var(--border);
+    margin:25px 0;
+}
+
+.submit-btn {
+    width:100%;
+    background:var(--green);
+    color:white;
+    border:none;
+    border-radius:8px;
+    min-height:50px;
+    font-family:inherit;
+    font-weight:700;
+    font-size:13px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.submit-btn:hover { background:var(--deep); transform:translateY(-1px); }
+
+.alert {
+    padding:14px 16px;
+    border-radius:9px;
+    margin-bottom:20px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.error {
+    background:#fff0ed;
+    color:#9c392b;
+    border:1px solid #f3d2ca;
+}
+
+.success {
+    background:#edf6ed;
+    color:#285d3c;
+    border:1px solid #cce2ce;
+}
+
+.result-box {
+    background:#f6f8f3;
+    border:1px solid #dce5d9;
+    border-radius:12px;
+    padding:23px;
+    margin-top:15px;
+}
+
+.result-box h3 {
+    font-family:'Playfair Display',serif;
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.reference {
+    color:var(--green);
+    font-size:21px;
+    font-weight:700;
+    margin:12px 0;
+}
+
+.result-box p {
+    font-size:13px;
+    line-height:1.8;
+    color:#58665e;
+    overflow-wrap:anywhere;
+}
+
+.detail-list {
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid var(--border);
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.detail-item {
+    font-size:12px;
+    line-height:1.6;
+    color:#58665e;
+}
+
+.detail-item strong {
+    display:block;
+    color:var(--green);
+    margin-bottom:3px;
+}
+
+.official-link {
+    display:inline-block;
+    margin-top:18px;
+    background:var(--green);
+    color:white;
+    text-decoration:none;
+    padding:13px 19px;
+    border-radius:7px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.official-link:hover { background:var(--deep); }
+
+.notice {
+    background:#faf7ef;
+    border-left:3px solid var(--gold);
+    padding:13px 15px;
+    color:#776c54;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:22px;
+}
+
+footer {
+    background:var(--deep);
+    color:#b9c5bd;
+    padding:23px 7%;
+    text-align:center;
+    font-size:11px;
+}
+
+@media(max-width:650px) {
+    header { padding:16px 5%; }
+    nav { gap:13px; }
+    .hero { padding:40px 6%; }
+    .container { width:92%; margin-top:25px; }
+    .panel { padding:20px 16px; }
+    .method-grid,.form-grid,.detail-list { grid-template-columns:1fr; }
+    .field.full { grid-column:auto; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        TERRITY
+        <small>TRUTH ROOTED IN LAND</small>
+    </div>
+
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Property Search</a>
+        <a href="/history">History</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="eyebrow">PROPERTY RECORD SERVICES</div>
+    <h1>Encumbrance Certificate</h1>
+    <p>Prepare your property search details and continue to the official Telangana Registration & Stamps service.</p>
+</section>
+
+<main class="container">
+
+    <div class="topline">
+        <h2>Search Property Records</h2>
+        <span class="tag">EC SERVICE</span>
+    </div>
+
+    {% if error %}
+        <div class="alert error">{{ error }}</div>
+    {% endif %}
+
+    {% if saved %}
+
+    <div class="panel">
+
+        <div class="alert success">
+            Your search details have been saved to your TERRITY account.
+            Your official EC search has not yet been submitted.
+        </div>
+
+        <div class="result-box">
+
+            <h3>Search Details Saved</h3>
+
+            <p>TERRITY Reference Number</p>
+            <div class="reference">{{ reference }}</div>
+
+            <p>
+                This reference tracks the details saved in TERRITY.
+                It is not a government application number or an Encumbrance Certificate.
+            </p>
+
+            {% if search_details %}
+            <div class="detail-list">
+
+                <div class="detail-item">
+                    <strong>Search Method</strong>
+                    {{ "Document Number" if search_details.search_by == "document" else "Property Details" }}
+                </div>
+
+                {% if search_details.search_by == "document" %}
+                <div class="detail-item">
+                    <strong>Document Number</strong>
+                    {{ search_details.document_number }}
+                </div>
+                <div class="detail-item">
+                    <strong>Registration Year</strong>
+                    {{ search_details.registration_year }}
+                </div>
+                <div class="detail-item">
+                    <strong>Sub-Registrar Office</strong>
+                    {{ search_details.sro }}
+                </div>
+                {% else %}
+                <div class="detail-item">
+                    <strong>District</strong>
+                    {{ search_details.district }}
+                </div>
+                <div class="detail-item">
+                    <strong>Mandal</strong>
+                    {{ search_details.mandal }}
+                </div>
+                <div class="detail-item">
+                    <strong>Village</strong>
+                    {{ search_details.village }}
+                </div>
+                <div class="detail-item">
+                    <strong>Survey Number</strong>
+                    {{ search_details.survey_number }}
+                </div>
+                {% if search_details.plot_number %}
+                <div class="detail-item">
+                    <strong>Plot Number</strong>
+                    {{ search_details.plot_number }}
+                </div>
+                {% endif %}
+                {% if search_details.house_number %}
+                <div class="detail-item">
+                    <strong>House Number</strong>
+                    {{ search_details.house_number }}
+                </div>
+                {% endif %}
+                {% endif %}
+
+                <div class="detail-item">
+                    <strong>Search From</strong>
+                    {{ search_details.from_date or "Not provided" }}
+                </div>
+                <div class="detail-item">
+                    <strong>Search To</strong>
+                    {{ search_details.to_date or "Not provided" }}
+                </div>
+
+            </div>
+            {% endif %}
+
+            <a class="official-link"
+               href="{{ official_url }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                Continue to Official Telangana EC Portal ↗
+            </a>
+
+            <div class="notice">
+                The official government portal will handle authentication,
+                the actual EC search and any applicable payment.
+                Your details are not automatically transferred from TERRITY.
+                Enter them again on the official portal when requested.
+            </div>
+
+        </div>
+
+        <p style="margin-top:20px;font-size:13px;">
+            <a href="/encumbrance" style="color:#173c32;font-weight:700;text-decoration:none;">
+                ← Start another EC search
+            </a>
+        </p>
+
+    </div>
+
+    {% else %}
+
+    <form method="POST" action="/encumbrance" class="panel">
+
+        <div class="section-title"><span>01</span> Select Search Method</div>
+
+        <div class="method-grid">
+
+            <label class="method-option">
+                <input type="radio" name="search_by" value="document" checked>
+                <span>
+                    <strong>By Document Number</strong>
+                    <small>Use the registration document number, year and Sub-Registrar Office.</small>
+                </span>
+            </label>
+
+            <label class="method-option">
+                <input type="radio" name="search_by" value="property">
+                <span>
+                    <strong>By Property</strong>
+                    <small>Use the district, mandal, village and property survey details.</small>
+                </span>
+            </label>
+
+        </div>
+
+        <div id="documentFields">
+
+            <div class="section-title"><span>02</span> Document Search Details</div>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Document Number *</label>
+                    <input type="text" name="document_number" placeholder="Enter document number">
+                </div>
+
+                <div class="field">
+                    <label>Registration Year *</label>
+                    <input type="number" name="registration_year" placeholder="e.g. 2024" min="1900" max="2100">
+                </div>
+
+                <div class="field full">
+                    <label>Sub-Registrar Office (SRO) *</label>
+                    <input type="text" name="sro" placeholder="Enter SRO name or location">
+                </div>
+
+            </div>
+        </div>
+
+        <div id="propertyFields" class="hidden">
+
+            <div class="section-title"><span>02</span> Property Location Details</div>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>District *</label>
+                    <select name="district" id="district">
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Mandal *</label>
+                    <select name="mandal" id="mandal" disabled>
+                        <option value="">Select Mandal</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label>Village *</label>
+                    <select name="village" id="village" disabled>
+                        <option value="">Select Village</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Survey Number *</label>
+                    <input type="text" name="survey_number" placeholder="Enter survey number">
+                </div>
+
+                <div class="field">
+                    <label>Plot Number</label>
+                    <input type="text" name="plot_number" placeholder="Enter plot number">
+                </div>
+
+                <div class="field">
+                    <label>House Number</label>
+                    <input type="text" name="house_number" placeholder="Enter house number">
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title"><span>03</span> Search Period</div>
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>From Date</label>
+                <input type="date" name="from_date">
+            </div>
+
+            <div class="field">
+                <label>To Date</label>
+                <input type="date" name="to_date">
+            </div>
+
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Save Details & Continue →
+        </button>
+
+        <div class="notice">
+            Saving this form records your search details in your TERRITY account.
+            It does not submit an application to the government or generate an EC.
+            The official portal handles the actual service.
+        </div>
+
+    </form>
+
+    {% endif %}
+
+</main>
+
+<footer>
+    TERRITY · Truth rooted in land · Independent Land Services Platform
+</footer>
+
+<script>
+const documentFields = document.getElementById("documentFields");
+const propertyFields = document.getElementById("propertyFields");
+
+const districtSelect = document.getElementById("district");
+const mandalSelect = document.getElementById("mandal");
+const villageSelect = document.getElementById("village");
+
+const radios = document.querySelectorAll('input[name="search_by"]');
+
+function updateSearchMethod() {
+    const selected = document.querySelector('input[name="search_by"]:checked');
+    if (!selected) return;
+
+    const isDocument = selected.value === "document";
+
+    documentFields.classList.toggle("hidden", !isDocument);
+    propertyFields.classList.toggle("hidden", isDocument);
+
+    document.querySelectorAll("#documentFields input").forEach(input => {
+        input.required = isDocument;
+    });
+
+    if (districtSelect) districtSelect.required = !isDocument;
+    if (mandalSelect) mandalSelect.required = !isDocument;
+    if (villageSelect) villageSelect.required = !isDocument;
+
+    const survey = document.querySelector('[name="survey_number"]');
+    if (survey) survey.required = !isDocument;
+}
+
+radios.forEach(radio => radio.addEventListener("change", updateSearchMethod));
+updateSearchMethod();
+
+async function loadDistricts() {
+    if (!districtSelect) return;
+
+    try {
+        const response = await fetch("/api/locations/districts");
+        if (!response.ok) throw new Error("District data unavailable");
+
+        const districts = await response.json();
+        districtSelect.innerHTML = '<option value="">Select District</option>';
+
+        districts.forEach(district => {
+            const option = document.createElement("option");
+            option.value = district.name;
+            option.textContent = district.name;
+            option.dataset.id = district.id;
+            districtSelect.appendChild(option);
+        });
+    } catch (error) {
+        districtSelect.innerHTML = '<option value="">District data unavailable</option>';
+        console.error(error);
+    }
+}
+
+async function loadMandals(districtId) {
+    mandalSelect.innerHTML = '<option value="">Loading Mandals...</option>';
+    mandalSelect.disabled = true;
+    villageSelect.innerHTML = '<option value="">Select Village</option>';
+    villageSelect.disabled = true;
+
+    try {
+        const response = await fetch(
+            `/api/locations/mandals?district_id=${encodeURIComponent(districtId)}`
+        );
+        if (!response.ok) throw new Error("Mandal data unavailable");
+
+        const mandals = await response.json();
+        mandalSelect.innerHTML = '<option value="">Select Mandal</option>';
+
+        mandals.forEach(mandal => {
+            const option = document.createElement("option");
+            option.value = mandal.name;
+            option.textContent = mandal.name;
+            option.dataset.id = mandal.id;
+            mandalSelect.appendChild(option);
+        });
+
+        mandalSelect.disabled = false;
+    } catch (error) {
+        mandalSelect.innerHTML = '<option value="">Mandal data unavailable</option>';
+        console.error(error);
+    }
+}
+
+async function loadVillages(mandalId) {
+    villageSelect.innerHTML = '<option value="">Loading Villages...</option>';
+    villageSelect.disabled = true;
+
+    try {
+        const response = await fetch(
+            `/api/locations/villages?mandal_id=${encodeURIComponent(mandalId)}`
+        );
+        if (!response.ok) throw new Error("Village data unavailable");
+
+        const villages = await response.json();
+        villageSelect.innerHTML = '<option value="">Select Village</option>';
+
+        villages.forEach(village => {
+            const option = document.createElement("option");
+            option.value = village.name;
+            option.textContent = village.name;
+            villageSelect.appendChild(option);
+        });
+
+        villageSelect.disabled = false;
+    } catch (error) {
+        villageSelect.innerHTML = '<option value="">Village data unavailable</option>';
+        console.error(error);
+    }
+}
+
+if (districtSelect) {
+    districtSelect.addEventListener("change", function() {
+        const option = this.options[this.selectedIndex];
+
+        if (option.dataset.id) {
+            loadMandals(option.dataset.id);
+        } else {
+            mandalSelect.innerHTML = '<option value="">Select Mandal</option>';
+            mandalSelect.disabled = true;
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+            villageSelect.disabled = true;
+        }
+    });
+
+    mandalSelect.addEventListener("change", function() {
+        const option = this.options[this.selectedIndex];
+
+        if (option.dataset.id) {
+            loadVillages(option.dataset.id);
+        } else {
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+            villageSelect.disabled = true;
+        }
+    });
+
+    loadDistricts();
+}
+</script>
+
+</body>
+</html>

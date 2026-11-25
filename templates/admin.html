@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | TERRITY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f3f0e8;
+            color: #26382e;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        header {
+            background: #1d392c;
+            color: #fffdf5;
+            padding: 27px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 29px;
+            letter-spacing: 2px;
+        }
+
+        .brand span {
+            color: #d5b56d;
+        }
+
+        .brand-tag {
+            color: #d7d9ca;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .admin-label {
+            border: 1px solid rgba(213,181,109,0.5);
+            color: #e5cf9c;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        nav {
+            background: #fffdf8;
+            padding: 17px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 27px;
+            box-shadow: 0 3px 15px rgba(34,48,37,0.05);
+            border-bottom: 1px solid #e8e5da;
+        }
+
+        nav a {
+            color: #59665c;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #a17c36;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 38px 5%;
+        }
+
+        .welcome {
+            position: relative;
+            min-height: 210px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 38px 42px;
+            border-radius: 17px;
+            margin-bottom: 32px;
+            color: white;
+            background:
+                linear-gradient(90deg, rgba(20,48,35,0.96), rgba(20,48,35,0.76)),
+                url("https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1400&q=85")
+                center/cover;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .eyebrow {
+            color: #d9bd79;
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 13px;
+        }
+
+        .welcome h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(29px, 4vw, 39px);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            color: #dce3d9;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .section-heading {
+            margin-bottom: 19px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            color: #203b2e;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .section-heading p {
+            color: #858b80;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 17px;
+            margin-bottom: 37px;
+        }
+
+        .card {
+            background: #fffdf8;
+            padding: 22px 19px;
+            border: 1px solid #e9e5d9;
+            border-radius: 12px;
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(34,48,37,0.07);
+            border-color: #d6c49a;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card h3 {
+            color: #7b8378;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1eee3;
+            border-radius: 8px;
+            color: #9b793c;
+            font-size: 15px;
+        }
+
+        .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: #203b2e;
+            margin-top: 19px;
+        }
+
+        .section {
+            background: #fffdf8;
+            border: 1px solid #e9e5d9;
+            border-radius: 13px;
+            padding: 25px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #203b2e;
+            font-size: 21px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            color: #92978d;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+        }
+
+        th {
+            background: #f3f0e8;
+            color: #697568;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 15px 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px 14px;
+            border-bottom: 1px solid #eeece4;
+            color: #566258;
+            font-size: 12px;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover td {
+            background: #faf8f1;
+        }
+
+        .user-id {
+            color: #a17c36;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 30px;
+            background: #eaf2e9;
+            color: #47734e;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 28px;
+            color: #92978d;
+        }
+
+        .print-section {
+            display: flex;
+            justify-content: flex-end;
+            margin: 28px 0;
+        }
+
+        button {
+            background: #203b2e;
+            color: white;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #315743;
+            transform: translateY(-1px);
+        }
+
+        .notice {
+            background: #f7f3e9;
+            border-left: 3px solid #c4a45d;
+            padding: 17px 20px;
+            border-radius: 5px;
+            color: #77705d;
+            font-size: 11px;
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .notice strong {
+            color: #80652f;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #969a8e;
+            font-size: 10px;
+            letter-spacing: 1px;
+            border-top: 1px solid #e8e5da;
+            background: #fffdf8;
+        }
+
+        @media(max-width: 1050px) {
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width: 650px) {
+            header {
+                padding: 23px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                padding: 16px 20px;
+                gap: 17px;
+            }
+
+            .container {
+                padding: 25px 18px;
+            }
+
+            .welcome {
+                padding: 29px 23px;
+                min-height: 190px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .card {
+                padding: 17px 14px;
+            }
+
+            .number {
+                font-size: 29px;
+            }
+
+            .section {
+                padding: 18px 14px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+            }
+
+            .print-section {
+                justify-content: stretch;
+            }
+
+            .print-section button {
+                width: 100%;
+            }
+        }
+
+        @media(max-width: 360px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            nav, button {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            .card, .section {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+
+            footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <div class="brand">TERRI<span>TY</span></div>
+        <div class="brand-tag">Truth rooted in land.</div>
+    </div>
+
+    <div class="admin-label">ADMINISTRATION PANEL</div>
+</header>
+
+<nav>
+    <a href="/admin" class="active">Admin Overview</a>
+    <a href="/user-details">User Management</a>
+    <a href="/dashboard">User Dashboard</a>
+    <a href="/history">Activity History</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<main class="container">
+
+    <section class="welcome">
+        <div class="welcome-content">
+            <div class="eyebrow">TERRITY · ADMINISTRATION</div>
+            <h1>Dashboard Overview</h1>
+            <p>
+                Monitor platform activity, review registered accounts
+                and keep track of property-related requests.
+            </p>
+        </div>
+    </section>
+
+    <div class="section-heading">
+        <h2>Platform Overview</h2>
+        <p>A summary of the records stored in your project database.</p>
+    </div>
+
+    <section class="cards">
+
+        <div class="card">
+            <div class="card-top">
+                <h3>Registered Users</h3>
+                <div class="card-icon">♙</div>
+            </div>
+            <div class="number">{{ total_users }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <h3>Property Searches</h3>
+                <div class="card-icon">⌕</div>
+            </div>
+            <div class="number">{{ total_searches }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <h3>EC Requests</h3>
+                <div class="card-icon">▤</div>
+            </div>
+            <div class="number">{{ ec_count }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <h3>Document Verifications</h3>
+                <div class="card-icon">✓</div>
+            </div>
+            <div class="number">{{ verification_count }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <h3>Total Activities</h3>
+                <div class="card-icon">◷</div>
+            </div>
+            <div class="number">{{ total_records }}</div>
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <div class="section-header">
+            <div>
+                <h2>User Management</h2>
+                <p class="section-subtitle">
+                    Registered accounts and their basic details
+                </p>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Full Name</th>
+                        <th>Email Address</th>
+                        <th>District</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td class="user-id">#{{ user.id }}</td>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.district or "Not provided" }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty">
+                            No registered users yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <div class="section-header">
+            <div>
+                <h2>Recent Activities</h2>
+                <p class="section-subtitle">
+                    References and activities recorded by the platform
+                </p>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Activity</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in activities %}
+                    <tr>
+                        <td class="user-id">
+                            {{ item.reference_number }}
+                        </td>
+                        <td>{{ item.activity }}</td>
+                        <td>{{ item.activity_date }}</td>
+                        <td>
+                            <span class="status">{{ item.status }}</span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty">
+                            No activities recorded yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <div class="print-section">
+        <button onclick="window.print()">PRINT ADMIN REPORT</button>
+    </div>
+
+    <div class="notice">
+        <strong>Demo Notice:</strong>
+        This dashboard displays information stored in the local TERRITY
+        project database. It is an independent educational demonstration
+        and is not connected to any government database or department.
+    </div>
+
+</main>
+
+<footer>
+    © 2026 TERRITY · TRUTH ROOTED IN LAND
+</footer>
+
+</body>
+</html>

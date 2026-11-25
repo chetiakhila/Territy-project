@@ -1,0 +1,600 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Search | TERRITY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --forest: #153b30;
+            --deep: #0e2b23;
+            --green: #285b49;
+            --gold: #b99a60;
+            --cream: #f6f5ef;
+            --white: #fff;
+            --text: #263c33;
+            --muted: #839087;
+            --border: #e7e9e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            min-height: 76px;
+            background: var(--deep);
+            padding: 13px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gold);
+            color: #e4c88f;
+            display: grid;
+            place-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+        }
+
+        .brand-name {
+            color: #f7f3e9;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+
+        .brand-tagline {
+            color: #c8b58b;
+            font-size: 9px;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e1e9e3;
+            font-size: 11px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #dfc48d;
+        }
+
+        .hero {
+            min-height: 245px;
+            padding: 43px 8%;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, rgba(9,35,27,.96), rgba(15,55,42,.78), rgba(15,55,42,.25)),
+                url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85")
+                center 55% / cover;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            color: #d9bd84;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 13px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 43px);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #dce5dc;
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 570px;
+        }
+
+        .container {
+            width: min(900px, 90%);
+            margin: -25px auto 55px;
+            position: relative;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 33px;
+            box-shadow: 0 14px 38px rgba(20, 50, 37, .07);
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .panel-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--forest);
+        }
+
+        .tag {
+            background: #edf2ec;
+            color: var(--green);
+            padding: 8px 13px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 27px;
+        }
+
+        .section-title {
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.7px;
+            margin: 27px 0 17px;
+            padding-bottom: 11px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title span {
+            color: var(--gold);
+            margin-right: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 19px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #354a40;
+        }
+
+        input,
+        select {
+            width: 100%;
+            height: 47px;
+            padding: 0 13px;
+            border: 1px solid #e1e6de;
+            border-radius: 8px;
+            background: #fdfdfb;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+            transition: .2s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(185,154,96,.12);
+        }
+
+        select:disabled {
+            background: #f1f2ee;
+            cursor: not-allowed;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            margin-top: 29px;
+            border: none;
+            border-radius: 8px;
+            background: var(--forest);
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        button:hover {
+            background: var(--deep);
+            transform: translateY(-2px);
+        }
+
+        .note {
+            margin-top: 24px;
+            padding: 15px 17px;
+            background: #f7f3e9;
+            border-left: 3px solid var(--gold);
+            border-radius: 5px;
+            color: #76694f;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 23px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .back:hover {
+            color: var(--gold);
+        }
+
+        footer {
+            background: var(--deep);
+            color: #bdc9bf;
+            text-align: center;
+            padding: 24px 15px;
+            font-size: 10px;
+            letter-spacing: .5px;
+            line-height: 1.9;
+        }
+
+        @media(max-width: 650px) {
+            header {
+                padding: 16px 5%;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 38px 6%;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .panel {
+                padding: 22px 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <div class="brand-icon">T</div>
+        <div>
+            <div class="brand-name">TERRITY</div>
+            <div class="brand-tagline">TRUTH ROOTED IN LAND</div>
+        </div>
+    </div>
+
+    <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search" class="active">Property Search</a>
+        <a href="/encumbrance">EC Request</a>
+        <a href="/history">History</a>
+        <a href="/logout">Logout ↗</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">PROPERTY RECORD SERVICES</div>
+        <h1>Property Search</h1>
+        <p>
+            Explore property information using document and location
+            details through the TERRITY demonstration platform.
+        </p>
+    </div>
+</section>
+
+<main class="container">
+
+    <section class="panel">
+
+        <div class="panel-heading">
+            <h2>Search Property Records</h2>
+            <span class="tag">PROPERTY SEARCH</span>
+        </div>
+
+        <p class="subtitle">
+            Enter the document and property location details to create a search request.
+        </p>
+
+        <form action="/property" method="POST">
+
+            <div class="section-title">
+                <span>01</span> Document Information
+            </div>
+
+            <div class="form-grid">
+
+                <div class="field full">
+                    <label for="document_number">Document Number *</label>
+                    <input
+                        type="text"
+                        id="document_number"
+                        name="document_number"
+                        placeholder="Example: 1234/2024"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span>02</span> Property Location
+            </div>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="district">District *</label>
+                    <select id="district" name="district" required>
+                        <option value="">Loading districts...</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="mandal">Mandal *</label>
+                    <select id="mandal" name="mandal" disabled required>
+                        <option value="">Select Mandal</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label for="village">Village *</label>
+                    <select id="village" name="village" disabled required>
+                        <option value="">Select Village</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="survey_number">Survey Number *</label>
+                    <input
+                        type="text"
+                        id="survey_number"
+                        name="survey_number"
+                        placeholder="Example: 125/A"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <button type="submit">Search Property →</button>
+
+        </form>
+
+        <div class="note">
+            <strong>Important:</strong> TERRITY is an independent educational
+            demonstration. Search requests are stored locally and do not retrieve
+            or verify official government ownership or registration records.
+        </div>
+
+        <a href="/dashboard" class="back">← Back to Dashboard</a>
+
+    </section>
+
+</main>
+
+<footer>
+    TERRITY · TRUTH ROOTED IN LAND
+    <br>
+    Independent Educational Property Records Demonstration
+</footer>
+
+<script>
+    const districtSelect = document.getElementById("district");
+    const mandalSelect = document.getElementById("mandal");
+    const villageSelect = document.getElementById("village");
+
+    async function loadDistricts() {
+        try {
+            const response = await fetch("/api/locations/districts");
+
+            if (!response.ok) {
+                throw new Error("District list unavailable");
+            }
+
+            const districts = await response.json();
+
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+
+            districts.forEach(district => {
+                const option = document.createElement("option");
+                option.value = district.name;
+                option.textContent = district.name;
+                option.dataset.id = district.id;
+                districtSelect.appendChild(option);
+            });
+
+        } catch (error) {
+            districtSelect.innerHTML =
+                '<option value="">Unable to load districts</option>';
+            console.error(error);
+        }
+    }
+
+    async function loadMandals(districtId) {
+        mandalSelect.innerHTML = '<option value="">Loading Mandals...</option>';
+        mandalSelect.disabled = true;
+
+        villageSelect.innerHTML = '<option value="">Select Village</option>';
+        villageSelect.disabled = true;
+
+        try {
+            const response = await fetch(
+                `/api/locations/mandals?district_id=${encodeURIComponent(districtId)}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Mandal list unavailable");
+            }
+
+            const mandals = await response.json();
+
+            mandalSelect.innerHTML = '<option value="">Select Mandal</option>';
+
+            mandals.forEach(mandal => {
+                const option = document.createElement("option");
+                option.value = mandal.name;
+                option.textContent = mandal.name;
+                option.dataset.id = mandal.id;
+                mandalSelect.appendChild(option);
+            });
+
+            mandalSelect.disabled = false;
+
+        } catch (error) {
+            mandalSelect.innerHTML =
+                '<option value="">Unable to load mandals</option>';
+            console.error(error);
+        }
+    }
+
+    async function loadVillages(mandalId) {
+        villageSelect.innerHTML = '<option value="">Loading Villages...</option>';
+        villageSelect.disabled = true;
+
+        try {
+            const response = await fetch(
+                `/api/locations/villages?mandal_id=${encodeURIComponent(mandalId)}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Village list unavailable");
+            }
+
+            const villages = await response.json();
+
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+
+            villages.forEach(village => {
+                const option = document.createElement("option");
+                option.value = village.name;
+                option.textContent = village.name;
+                villageSelect.appendChild(option);
+            });
+
+            villageSelect.disabled = false;
+
+        } catch (error) {
+            villageSelect.innerHTML =
+                '<option value="">Unable to load villages</option>';
+            console.error(error);
+        }
+    }
+
+    districtSelect.addEventListener("change", function() {
+        const selected = this.options[this.selectedIndex];
+
+        if (selected.dataset.id) {
+            loadMandals(selected.dataset.id);
+        } else {
+            mandalSelect.innerHTML = '<option value="">Select Mandal</option>';
+            mandalSelect.disabled = true;
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+            villageSelect.disabled = true;
+        }
+    });
+
+    mandalSelect.addEventListener("change", function() {
+        const selected = this.options[this.selectedIndex];
+
+        if (selected.dataset.id) {
+            loadVillages(selected.dataset.id);
+        } else {
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+            villageSelect.disabled = true;
+        }
+    });
+
+    loadDistricts();
+</script>
+
+</body>
+</html>

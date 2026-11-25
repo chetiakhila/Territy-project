@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | TERRITY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --forest: #153b30;
+            --deep: #0e2b23;
+            --green: #285b49;
+            --gold: #b99a60;
+            --cream: #f6f5ef;
+            --white: #fff;
+            --text: #263c33;
+            --muted: #839087;
+            --border: #e7e9e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            min-height: 76px;
+            background: var(--deep);
+            padding: 13px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gold);
+            color: #e4c88f;
+            display: grid;
+            place-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+        }
+
+        .brand-name {
+            color: #f7f3e9;
+            font-weight: 700;
+            letter-spacing: 4px;
+            font-size: 16px;
+        }
+
+        .brand-tagline {
+            color: #c8b58b;
+            font-size: 9px;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #e8eee9;
+            font-size: 12px;
+        }
+
+        .avatar {
+            width: 37px;
+            height: 37px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #294d40;
+            border: 1px solid #627e6b;
+            color: #e7d3a8;
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            min-height: 52px;
+            padding: 0 7%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: 27px;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        nav a {
+            color: #718077;
+            white-space: nowrap;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 19px 0;
+            transition: .2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--forest);
+        }
+
+        nav a.active {
+            border-bottom: 2px solid var(--gold);
+        }
+
+        nav .logout {
+            margin-left: auto;
+            color: #a65d52;
+        }
+
+        /* PAGE */
+
+        .container {
+            width: min(1260px, 86%);
+            margin: 37px auto 55px;
+        }
+
+        .eyebrow {
+            color: #a58a54;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            margin-bottom: 10px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--forest);
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            min-height: 285px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 13px;
+            padding: 43px 48px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, rgba(9,35,27,.97) 0%, rgba(15,55,42,.88) 48%, rgba(15,55,42,.20) 100%),
+                url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85")
+                center 55% / cover;
+            box-shadow: 0 15px 35px rgba(20, 50, 37, .12);
+        }
+
+        .welcome-content {
+            max-width: 590px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-label {
+            color: #dfc48d;
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 17px;
+        }
+
+        .welcome h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(31px, 4vw, 44px);
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 13px;
+        }
+
+        .welcome p {
+            color: #e0e8e1;
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 450px;
+        }
+
+        .welcome-email {
+            display: inline-block;
+            margin-top: 21px;
+            padding-top: 13px;
+            border-top: 1px solid rgba(255,255,255,.3);
+            color: #e1d2ad;
+            font-size: 11px;
+        }
+
+        .welcome-mark {
+            position: absolute;
+            right: 8%;
+            bottom: -85px;
+            font-family: 'Playfair Display', serif;
+            font-size: 330px;
+            color: rgba(255,255,255,.045);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        /* SERVICES */
+
+        .services-section {
+            margin-top: 44px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 15px;
+            margin-bottom: 21px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--forest);
+            font-size: 27px;
+            font-weight: 500;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .service {
+            position: relative;
+            overflow: hidden;
+            min-height: 215px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            transition: transform .25s, box-shadow .25s, border-color .25s;
+        }
+
+        .service::after {
+            content: "";
+            position: absolute;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            background: #f5f5ef;
+            right: -43px;
+            top: -43px;
+            transition: .3s;
+        }
+
+        .service:hover {
+            transform: translateY(-5px);
+            border-color: #c2d0c3;
+            box-shadow: 0 15px 30px rgba(26, 65, 49, .09);
+        }
+
+        .service:hover::after {
+            transform: scale(1.5);
+        }
+
+        .service-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 23px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            background: #edf2ec;
+            color: var(--green);
+            border-radius: 9px;
+            font-size: 21px;
+        }
+
+        .service-number {
+            color: #b5a078;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .service h3 {
+            color: var(--forest);
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .service p {
+            color: #849087;
+            font-size: 11px;
+            line-height: 1.8;
+            flex-grow: 1;
+        }
+
+        .service-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            margin-top: 18px;
+            border-top: 1px solid #eef0eb;
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .arrow {
+            font-size: 18px;
+            transition: transform .2s;
+        }
+
+        .service:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* PROJECT NOTICE */
+
+        .notice {
+            margin-top: 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            padding: 17px 20px;
+            border: 1px solid #e9dfc8;
+            border-radius: 9px;
+            background: #f3efe4;
+        }
+
+        .notice-icon {
+            color: #9e8149;
+            font-size: 18px;
+        }
+
+        .notice p {
+            color: #77715f;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .notice strong {
+            color: #6b5731;
+        }
+
+        footer {
+            padding: 23px 15px;
+            text-align: center;
+            color: #a0a79f;
+            background: white;
+            border-top: 1px solid var(--border);
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 950px) {
+            .services {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .container {
+                width: 91%;
+            }
+
+            header,
+            nav {
+                padding-left: 4.5%;
+                padding-right: 4.5%;
+            }
+        }
+
+        @media(max-width: 620px) {
+            header {
+                min-height: 68px;
+            }
+
+            .account-name {
+                display: none;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            nav .logout {
+                margin-left: 0;
+            }
+
+            .container {
+                margin-top: 27px;
+            }
+
+            .welcome {
+                min-height: 260px;
+                padding: 28px 24px;
+                background-position: 60% center;
+            }
+
+            .welcome-mark {
+                font-size: 210px;
+                right: -5px;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .service {
+                min-height: 190px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .page-heading h1 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <div class="brand-icon">T</div>
+        <div>
+            <div class="brand-name">TERRITY</div>
+            <div class="brand-tagline">TRUTH ROOTED IN LAND</div>
+        </div>
+    </div>
+
+    <div class="account">
+        <div class="avatar">T</div>
+        <span class="account-name">{{ user.full_name }}</span>
+    </div>
+</header>
+
+<nav>
+    <a href="/dashboard" class="active">Home</a>
+    <a href="/instructions">Instructions</a>
+    <a href="/search">Property Search</a>
+    <a href="/encumbrance">EC Request</a>
+    <a href="/verification">Document Verification</a>
+    <a href="/history">History</a>
+    <a href="/profile">My Profile</a>
+    <a href="/logout" class="logout">Logout ↗</a>
+</nav>
+
+<main class="container">
+
+    <section class="page-heading">
+        <div class="eyebrow">YOUR TERRITY SPACE</div>
+        <h1>Dashboard</h1>
+        <p>A simpler way to explore and manage property-related requests.</p>
+    </section>
+
+    <section class="welcome">
+        <div class="welcome-content">
+            <div class="welcome-label">WELCOME TO TERRITY</div>
+            <h2>Hello, {{ user.full_name }}.</h2>
+            <p>
+                Explore property information, submit document requests
+                and keep your activities organised in one place.
+            </p>
+            <div class="welcome-email">{{ user.email }}</div>
+        </div>
+        <div class="welcome-mark">T</div>
+    </section>
+
+    <section class="services-section">
+
+        <div class="section-heading">
+            <div>
+                <div class="eyebrow">EXPLORE THE PLATFORM</div>
+                <h2>Services & Tools</h2>
+            </div>
+            <p>Select a service to continue →</p>
+        </div>
+
+        <div class="services">
+
+            <a href="/search" class="service">
+                <div class="service-top">
+                    <div class="service-icon">⌕</div>
+                    <span class="service-number">01</span>
+                </div>
+                <h3>Property Search</h3>
+                <p>Explore sample property information using location and survey details.</p>
+                <div class="service-action">
+                    <span>Explore property</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/encumbrance" class="service">
+                <div class="service-top">
+                    <div class="service-icon">▤</div>
+                    <span class="service-number">02</span>
+                </div>
+                <h3>Encumbrance Certificate</h3>
+                <p>Enter property or document details to submit a demonstration EC request.</p>
+                <div class="service-action">
+                    <span>Start EC request</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/verification" class="service">
+                <div class="service-top">
+                    <div class="service-icon">✓</div>
+                    <span class="service-number">03</span>
+                </div>
+                <h3>Document Verification</h3>
+                <p>Submit document details and receive a demonstration reference number.</p>
+                <div class="service-action">
+                    <span>Verify document</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/history" class="service">
+                <div class="service-top">
+                    <div class="service-icon">◷</div>
+                    <span class="service-number">04</span>
+                </div>
+                <h3>Registration History</h3>
+                <p>Review property searches saved in the local project database.</p>
+                <div class="service-action">
+                    <span>View history</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/instructions" class="service">
+                <div class="service-top">
+                    <div class="service-icon">☷</div>
+                    <span class="service-number">05</span>
+                </div>
+                <h3>Instructions</h3>
+                <p>Find useful information about navigating the TERRITY platform.</p>
+                <div class="service-action">
+                    <span>Read instructions</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/profile" class="service">
+                <div class="service-top">
+                    <div class="service-icon">♙</div>
+                    <span class="service-number">06</span>
+                </div>
+                <h3>My Profile</h3>
+                <p>View your registered account information and personal details.</p>
+                <div class="service-action">
+                    <span>View profile</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <aside class="notice">
+        <div class="notice-icon">ⓘ</div>
+        <p>
+            <strong>Project information:</strong>
+            TERRITY is an independent educational demonstration.
+            It is not affiliated with a government department.
+            Generated references and sample results are not official
+            or legally valid property records.
+        </p>
+    </aside>
+
+</main>
+
+<footer>
+    TERRITY &nbsp; · &nbsp; TRUTH ROOTED IN LAND &nbsp; · &nbsp; INDEPENDENT EDUCATIONAL PROJECT
+</footer>
+
+</body>
+</html>
